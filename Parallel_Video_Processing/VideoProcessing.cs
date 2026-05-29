@@ -56,12 +56,12 @@ public partial class MiarVideo  // public
         var stopwatch = new Stopwatch();
         while (true)
         {
-            // get next frame
+            // capture
             stopwatch.Restart();
             capture.Read(frame);
             if (frame.Empty()) break;
 
-            // process frame and show
+            // process
             var edges = DetectEdgesOnFrame(frame, useParallel);
             var fps = 1000.0 / stopwatch.ElapsedMilliseconds;
             Cv2.PutText(
@@ -71,6 +71,8 @@ public partial class MiarVideo  // public
                 HersheyFonts.HersheyComplex,
                 0.5,
                 Scalar.White);
+
+            // display
             Cv2.ImShow("Kameradaki Kenarlar", edges);
             stopwatch.Stop();
 

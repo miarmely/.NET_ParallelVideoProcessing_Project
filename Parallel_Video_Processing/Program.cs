@@ -1,6 +1,6 @@
 ﻿namespace Parallel_Video_Processing;
 
-public class Program1
+public class Program
 {
     static void Main(string[] args)
     {
