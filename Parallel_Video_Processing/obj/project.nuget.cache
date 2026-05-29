@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "NHvtuDE33+U=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\MIARMELY\\Desktop\\ARCHIVE\\SCHOOL\\Courses\\Parallel_Programming\\Project_Homework\\Parallel_Video_Processing\\Parallel_Video_Processing.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\MIARMELY\\.nuget\\packages\\opencvsharp4\\4.13.0.20260528\\opencvsharp4.4.13.0.20260528.nupkg.sha512",
+    "C:\\Users\\MIARMELY\\.nuget\\packages\\opencvsharp4.runtime.win\\4.13.0.20260528\\opencvsharp4.runtime.win.4.13.0.20260528.nupkg.sha512"
+  ],
+  "logs": []
+}
