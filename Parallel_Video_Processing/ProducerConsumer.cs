@@ -10,6 +10,7 @@ public partial class ProducerConsumer  // private
     private readonly int bufferSize;
     private readonly BufferingStrategies strategy;
     private readonly BlockingCollection<Mat> frameBuffer;
+    private readonly CascadeClassifier faceCascade;
     private volatile bool running = false;
     /// <summary>
     /// Processed frame lock. 
@@ -29,6 +30,7 @@ public partial class ProducerConsumer  // private
         this.bufferSize = bufferSize ?? 5;
         this.frameBuffer = new BlockingCollection<Mat>(bufferSize ?? 5);
         this.strategy = strategy ?? BufferingStrategies.DROP_LATEST_FRAME;
+        this.faceCascade = new("./Cascades/haarcascade_frontalface_default.xml");
     }
 
     private void Producer(VideoCapture capture)
@@ -85,11 +87,30 @@ public partial class ProducerConsumer  // video processings
         var gray = new Mat();
         Cv2.CvtColor(frame, gray, ColorConversionCodes.BGR2GRAY);
 
-        var edges = new Mat();
-        Cv2.Canny(gray, edges, 100, 200);
+        var copyFrame = frame.Clone();
+        var faces = faceCascade.DetectMultiScale(
+            gray,
+            1.1,
+            5,
+            minSize: new Size(30, 30));
+        foreach (var face in faces)
+            Cv2.Rectangle(
+                copyFrame,
+                face,
+                Scalar.LimeGreen,
+                2);
+
+        // add face count
+        Cv2.PutText(
+            copyFrame,
+            $"Faces: {faces.Length}",
+            new Point(5, 40),
+            HersheyFonts.HersheyComplex,
+            0.5,
+            Scalar.White);
 
         gray.Dispose();
-        return edges;
+        return copyFrame;
     }
 }
 
@@ -108,6 +129,9 @@ public partial class ProducerConsumer  // main
         // start producers & consumers threads
         var producerTask = Task.Run(() => Producer(capture));
         var consumerTask1 = Task.Run(() => Consumer());
+        var consumerTask2 = Task.Run(() => Consumer());
+        var consumerTask3 = Task.Run(() => Consumer());
+        var consumerTask4 = Task.Run(() => Consumer());
 
         // main thread
         var stopwatch = Stopwatch.StartNew();
@@ -152,6 +176,9 @@ public partial class ProducerConsumer  // main
 
         await producerTask;
         await consumerTask1;
+        await consumerTask2;
+        await consumerTask3;
+        await consumerTask4;
         capture.Release();
         capture.Dispose();
         pFrameLatest?.Dispose();

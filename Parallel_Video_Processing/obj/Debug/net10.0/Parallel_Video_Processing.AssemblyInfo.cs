@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Parallel_Video_Processing")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+169aa5f106393aaae5eb2edfa2cd1a6484814ae9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2a0458d6f34dca2bc14c51d533b5dcda6dbfa8bf")]
 [assembly: System.Reflection.AssemblyProductAttribute("Parallel_Video_Processing")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Parallel_Video_Processing")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
